@@ -12,6 +12,12 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+
+
+
 class HomeController extends Controller
 {
 
@@ -24,7 +30,8 @@ class HomeController extends Controller
             'getCategryPosts',
             'search',
             'favoritePost',
-            'unFavoritePost'
+            'unFavoritePost',
+
         );
     }
     /**
@@ -34,8 +41,8 @@ class HomeController extends Controller
     {
         $categories = Category::all();
         $sliders = DB::table('posts')->take(4)->get();
-        // tap method to display post favorited function POST model to with paginate data
-        $posts = tap(Post::paginate(10))->transform(
+        // tap method for display post favorited function with paginate data when get POST model
+        $posts = tap(Post::paginate(12))->transform(
             function ($post) {
                 return [
                     'id' => $post->id,
@@ -51,12 +58,15 @@ class HomeController extends Controller
                 ];
             }
         );
+
+
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'posts' => $posts,
             'categories' => $categories,
             'sliders' => $sliders,
+
 
         ]);
     }
@@ -116,21 +126,41 @@ class HomeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreHomeRequest $request)
+    public function store(Request $request)
     {
+
+
         $image = $request->file('image')->store('logo', 'public');
         Home::create([
             "image" => $image,
         ]);
-        return Redirect::route('Dashboard');
+        return Redirect::route('dashboard');
     }
 
     /**
      * Display the specified resource.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(Home $home)
+    public function show(Home $home, $id)
     {
         //
+        $article = Post::find($id);
+        //   $posts = Post::paginate(10);
+        $posts = Post::all();
+        //  $post = DB::table('posts')->where('id', $home)->get();
+        $categories = Category::all();
+
+        return Inertia::render('PostPage', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'categories' => $categories,
+            'post' => $article,
+            'author' => $article->user->name,
+            'created_at' => $article->created_at->format('d-m-Y'),
+            'posts' => $posts,
+            'favourite_list' => $article->favorited(),
+        ]);
     }
 
     /**

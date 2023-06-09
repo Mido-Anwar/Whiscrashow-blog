@@ -42,8 +42,7 @@ const props = defineProps({
                 </h1>
 
                 <p v-html="post.content" class="content my-36 text-sm text-center"></p>
-                {{ post.id }}
-                {{ favourite_list }}
+               
             </div>
 
         </section>

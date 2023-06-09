@@ -40,6 +40,8 @@ Route::resource('tag', TagController::class)->middleware(['auth', 'verified', 'r
 Route::resource('role', RoleController::class)->middleware(['auth', 'verified', 'role:Admin']);
 Route::resource('permission', PermissionController::class)->middleware(['auth', 'verified', 'role:Admin']);
 Route::resource('user', UserController::class)->middleware(['auth', 'verified', 'role:Admin']);
+Route::resource('home', HomeController::class)->middleware(['auth', 'verified', 'role:Admin']);
+
 
 //
 //mail route
@@ -49,10 +51,14 @@ Route::resource('user', UserController::class)->middleware(['auth', 'verified', 
 // favorite list routes
 Route::post('/favorite/{post}', [HomeController::class, 'favoritePost'])->name('favorite');
 Route::post('/unfavorite/{post}', [HomeController::class, 'unfavoritePost'])->name('unfavorite');
+// قراءة المقال  route to read post
 Route::get('/show/{id}', [HomeController::class, 'show'])->name('article.show');
-Route::get('/homeLogo', [HomeController::class, 'create'])->name('logo.create');
-Route::post('/logoSave', [HomeController::class, 'store'])->name('logo.store');
+// logo change route
+//Route::get('/homeLogo',  [HomeController::class, 'create'])->name('logo.create');
+//Route::post('/logoSave', [HomeController::class, 'store'])->name('logo.store');
+//get posts by category route
 Route::get('/categories/{id}', [HomeController::class, 'getCategryPosts'])->name('categories');
+// search route
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 

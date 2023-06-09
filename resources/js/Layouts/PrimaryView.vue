@@ -15,11 +15,13 @@ import { useRoles } from "@/composables/roles";
 
 
 
+
 const props = defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
-    //  posts: Array,
-    // categories: Array,
+    posts: Array,
+    categories: Array,
+
 });
 // search method
 let search = ref('');
@@ -45,14 +47,13 @@ const showingNavigationDropdown = ref(false);
             <button @click="showingNavigationDropdown = !showingNavigationDropdown" id="menu" aria-labelledby="login list">
                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                     <path :class="{
-                            hidden: showingNavigationDropdown,
-                            'inline-flex': !showingNavigationDropdown,
-                        }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h16" />
+                        hidden: showingNavigationDropdown,
+                        'inline-flex': !showingNavigationDropdown,
+                    }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     <path :class="{
-                            hidden: !showingNavigationDropdown,
-                            'inline-flex': showingNavigationDropdown,
-                        }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        hidden: !showingNavigationDropdown,
+                        'inline-flex': showingNavigationDropdown,
+                    }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
 
             </button>
@@ -95,15 +96,8 @@ const showingNavigationDropdown = ref(false);
                 <hr class="my-3 text-slate-50">
                 <!--responsive category links-->
                 <div class="categories-link">
-
-                    <!--
-                    <ul v-for="category in categories" :key="category.id">
-                        <li>
-                            <Link :href="route('categories', [category.id])" class="link">{{ category.name }}</Link>
-                        </li>
-                     </ul>
-                    -->
-
+                    <Link v-for="category in categories" :key="category.id" :href="route('categories', [category.id])"
+                        class="link">{{ category.name }}</Link>
                 </div>
             </div>
         </div>
@@ -111,16 +105,15 @@ const showingNavigationDropdown = ref(false);
 
         <!--main category links-->
         <div class="categories">
-            <!--
-           <Link v-for="category in categories" :key="category.id" :href="route('categories', [category.id])" class="mx-3">
+
+            <Link v-for="category in categories" :key="category.id" :href="route('categories', [category.id])" class="mx-3">
             {{ category.name }}
             </Link>
-           -->
+
 
 
         </div>
         <!--logo -->
-
         <div class="logo">
             <div class="Whiscrashaw">
                 <Link :href="route('welcome')">

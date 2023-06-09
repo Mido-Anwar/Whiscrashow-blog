@@ -25,19 +25,19 @@ class PostController extends Controller
      */
     public function index()
     {
-          //right way to write route
-          $categories = Category::all();
-          return Inertia::render('Post/Index', [
-              'posts' => Post::all()->map(function ($post) {
-                  return [
-                      'id' => $post->id,
-                      'title' => $post->title,
-                      'content' => $post->content,
-                      'image' => asset('storage/' . $post->image),
-                      'post_category' => $post->category,
-                  ];
-              })
-          ], compact('categories'));
+        //right way to write route
+        $categories = Category::all();
+        return Inertia::render('Post/Index', [
+            'posts' => Post::all()->map(function ($post) {
+                return [
+                    'id' => $post->id,
+                    'title' => $post->title,
+                    'content' => $post->content,
+                    'image' => asset('storage/' . $post->image),
+                    'post_category' => $post->category,
+                ];
+            })
+        ], compact('categories'));
     }
 
     /**
@@ -45,32 +45,32 @@ class PostController extends Controller
      */
     public function create()
     {
-             //  dd(Auth::user()->id);
-             $tags = Tag::all();
-             $categories = Category::all();
-             if ($categories->count() == 0) {
-                 return redirect()->route('category.create');
-             }
-             if ($tags->count() == 0) {
-                 return redirect()->route('tag.create');
-             }
+        //  dd(Auth::user()->id);
+        $tags = Tag::all();
+        $categories = Category::all();
+        if ($categories->count() == 0) {
+            return redirect()->route('category.create');
+        }
+        if ($tags->count() == 0) {
+            return redirect()->route('tag.create');
+        }
 
-             return Inertia::render('Post/Create',         [
-                 'categories' => Category::all()->map(function ($category) {
-                     return [
-                         'id' => $category->id,
-                         'name' => $category->name,
-                     ];
-                 }),
-                 'tags' => Tag::all()->map(function ($tag) {
-                     return [
-                         'id' => $tag->id,
-                         'name' => $tag->name,
-                     ];
-                 }),
-                 'Auth' => Auth::user()->id,
+        return Inertia::render('Post/Create',         [
+            'categories' => Category::all()->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                ];
+            }),
+            'tags' => Tag::all()->map(function ($tag) {
+                return [
+                    'id' => $tag->id,
+                    'name' => $tag->name,
+                ];
+            }),
+            'Auth' => Auth::user()->id,
 
-             ]);
+        ]);
     }
 
     /**
@@ -100,7 +100,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return Inertia::render('PostPage', [
+            'post' => $post
+        ]);
     }
 
     /**
@@ -128,23 +130,23 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-              // dd($request);
-              $image = $post->image;
-              if ($request->hasFile('image')) {
-                  Storage::delete('/public' . $post->image);
-                  $image = $request->file('image')->store('images', 'public');
-              }
-              $post->update([
-                  'title' => $request->title,
-                  'content' => $request->content,
-                  'category_id' => $request->category_id,
-                  'slug' => Str::unvis($request->title),
-                  'image' => $image,
-                  'user_id' => Auth::user()->id,
-              ]);
-              $post->save();
-              $post->tags()->sync($request->tag_id);
-              return Redirect::route('post.index');
+        // dd($request);
+        $image = $post->image;
+        if ($request->hasFile('image')) {
+            Storage::delete('/public' . $post->image);
+            $image = $request->file('image')->store('images', 'public');
+        }
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'category_id' => $request->category_id,
+            'slug' => Str::unvis($request->title),
+            'image' => $image,
+            'user_id' => Auth::user()->id,
+        ]);
+        $post->save();
+        $post->tags()->sync($request->tag_id);
+        return Redirect::route('post.index');
     }
 
     /**

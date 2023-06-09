@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 
@@ -22,14 +23,7 @@ class CategoryController extends Controller
     public function index()
     {
         return Inertia::render('Category/Index', [
-            'categories' => Category::all()->map(function ($category) {
-                return [
-                    'id' =>      $category->id,
-                    'name' =>    $category->name,
-                    'detailes' => $category->detailes,
-                ];
-            }),
-
+            'categories' =>  DB::table('categories')->get(),
         ]);
     }
 
@@ -46,6 +40,8 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        $request->validated();
+
         $category =  Category::create(
             [
                 'name' => $request->name,

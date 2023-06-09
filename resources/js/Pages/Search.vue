@@ -29,13 +29,8 @@ const props = defineProps({
                         </div>
                     </div>
                 </div>
-
             </section>
-
-
-
         </section>
-
     </PrimaryView>
 </template>
 

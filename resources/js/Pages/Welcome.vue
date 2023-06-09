@@ -1,7 +1,8 @@
 <script setup>
 import PrimaryView from '@/Layouts/PrimaryView.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
+
 
 defineProps({
     canLogin: {
@@ -13,17 +14,23 @@ defineProps({
     posts: Object,
     categories: Array,
     sliders: Array,
+
 });
+/// favorites needed
+
+const favorite = (post) => {
+    router.post(`/favorite/${post}`);
+};
+
+const unFavorite = (post) => {
+    router.post(`/unfavorite/${post}`);
+};
 </script>
 
 <template>
     <Head title="Welcome" />
-    <PrimaryView v-bind:can-login="canLogin" v-bind:can-register="canRegister">
+    <PrimaryView v-bind:can-login="canLogin" v-bind:can-register="canRegister" v-bind:categories="categories">
         <div class="main-content">
-            <p>
-
-            </p>
-
             <!--slider section-->
             <section class="slider">
 
@@ -34,7 +41,7 @@ defineProps({
                     padding: 0,
                     margin: 0,
                     rewind: false,
-                    width: '90vw',
+                    width: '80vw',
                     height: 400,
                     cover: true,
                     interval: 4000,
@@ -54,40 +61,32 @@ defineProps({
 
             <!--articles section-->
             <section class="articles" dir="rtl">
+                <div class="article-card" v-for="post, index in posts.data" :key="index">
+                    <img v-if="post.image.startsWith(`https:`)" :src="post.image" :alt="post.title">
+                    <img v-else :src="`../../../storage/` + post.image" :alt="post.title">
+                    <span v-if="$page.props.auth.user" style="align-self: start;">
+                        <a href="#" v-if="post.postFavorite == false" @click.prevent="favorite(post.id)">
+                            <i id="like" class="fa-regular fa-heart mx-2"></i>القراءة لاحقا
+                        </a>
+                        <a href="#" v-else @click.prevent="unFavorite(post.id)">
+                            <i class="fa-solid fa-heart mx-2"></i>ازالة من القائمة
+                        </a>
+                    </span>
+                    <div class="title">{{ post.title }}</div>
 
-                <div v-for="post, index in posts.data" :key="index">
-                    <div class="article-card">
-                        <img v-if="post.image.startsWith(`https:`)" :src="post.image" :alt="post.title">
-                        <img v-else :src="`../../../storage/` + post.image" :alt="post.title">
-                        <span v-if="$page.props.auth.user">
-                            <a href="#" v-if="post.postFavorite == false" @click.prevent="favorite(post.id)">
-                                <span>
-                                    <i id="like" class="fa-regular fa-heart mx-2"></i>القراءة لاحقا
-                                </span>
-                            </a>
-                            <a href="#" v-else @click.prevent="unFavorite(post.id)">
-                                <span>
-                                    <i class="fa-solid fa-heart mx-2"></i>ازالة من القائمة
-                                </span>
-                            </a>
-                        </span>
-                        <div class="title">{{ post.title }}</div>
-
-                        <div class="link-div">
-                            <Link :href="route('article.show', [post.id])" class="button-28">أقرا المزيد ....</Link>
-                        </div>
-
-                    </div>
+                    <Link :href="route('article.show', [post.id])" class="button-28">أقرا المزيد ....</Link>
 
                 </div>
-            </section>
 
-            <div class="mt-4">
+            </section>
+            <div class="my-4">
                 <!--posts pagination -->
-                <Link v-for="link in posts.links" :href="link.url" v-html="link.label" :is="link.url ? `Link` : `span`"
-                    class="ml-2 p-2 bg-neutral-700 text-gold rounded-md" :class="link.url ? 'text-gold-600' : ''">
+                <Link v-for="link in posts.links" :href="link.url" v-html="link.label"
+                    :is="link.url ? '<Link></Link>' : '<span></span>'" class="ml-2 p-2 bg-neutral-700 rounded-md"
+                    style="color: #e16c06;">
                 </Link>
             </div>
+
         </div>
     </PrimaryView>
 </template>

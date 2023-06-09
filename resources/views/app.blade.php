@@ -3,23 +3,21 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <meta name="description" content="Whiscrashow blog for web devolopment. php javascript frontend backend ui/ux laravel mysql docker inertiajs Vuejs sass css html arabic content .">
+        <title inertia>{{ config('app.name', 'Whiscrashow') }}</title>
 
         <!-- Scripts -->
         @routes
-        @vite(['resources/js/app.js','resources/sass/app.scss',
+        @vite([
+            'resources/js/app.js','resources/sass/app.scss',
           "node_modules/@splidejs/vue-splide/dist/css/splide-core.min.css",
-        "node_modules/@splidejs/vue-splide/dist/css/themes/splide-default.min.css",
+        "node_modules/@splidejs/vue-splide/dist/css/themes/splide-skyblue.min.css",
+        "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
         "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
         @inertia
-        
+
     </body>
 </html>

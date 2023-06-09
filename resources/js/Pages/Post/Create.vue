@@ -3,8 +3,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 import TextInput from '@/Components/TextInput.vue';
@@ -50,8 +48,6 @@ const submit = () => {
                     class="m-2 bg-blue-500 hover:bg-blue-400 text-white font-bold p-2 border-b-4 border-blue-700 rounded w-1/6">
                 Back
                 </Link>
-
-
                 <form @submit.prevent="submit">
                     <InputLabel for="title" value="Title" />
                     <TextInput type="text" v-model="form.title" class="m-2 w-1/2" dir="rtl"></TextInput>
@@ -59,8 +55,7 @@ const submit = () => {
 
                     <InputLabel for="content" value="Content" />
                     <div>
-                        <Editor v-model="form.content" api-key="az1dyax66x07uneuuxzi6xos9oh0r277imflde417td7p4z5"
-                       />
+                        <Editor v-model="form.content" api-key="az1dyax66x07uneuuxzi6xos9oh0r277imflde417td7p4z5" />
                     </div>
                     <InputError class="m-2" :message="form.errors.content" />
 

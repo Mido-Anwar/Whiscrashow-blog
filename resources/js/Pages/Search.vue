@@ -4,17 +4,17 @@ import PrimaryView from '@/Layouts/PrimaryView.vue';
 
 
 const props = defineProps({
-    canLogin: Boolean,
-    canRegister: Boolean,
+
     categories: Array,
-    posts:Array
+    posts: Array,
+
 });
 
 </script>
 
 <template>
     <Head title="البحث" />
-    <PrimaryView v-bind:can-login="canLogin" v-bind:can-register="canRegister" v-bind:categories="categories">
+    <PrimaryView  v-bind:categories="categories">
         <section class="main-content">
 
             <section class="articles" dir="rtl">

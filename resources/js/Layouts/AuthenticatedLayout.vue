@@ -14,6 +14,8 @@ import { useRoles } from "@/composables/roles";
 
 const { hasRole } = useRoles();
 const showingNavigationDropdown = ref(false);
+
+
 </script>
 
 <template>

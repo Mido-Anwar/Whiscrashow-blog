@@ -15,6 +15,8 @@ defineProps({
     categories: Array,
     sliders: Array,
 
+
+
 });
 /// favorites needed
 
@@ -29,7 +31,7 @@ const unFavorite = (post) => {
 
 <template>
     <Head title="Welcome" />
-    <PrimaryView v-bind:can-login="canLogin" v-bind:can-register="canRegister" v-bind:categories="categories">
+    <PrimaryView  v-bind:categories="categories">
         <div class="main-content">
             <!--slider section-->
             <section class="slider">
@@ -61,6 +63,7 @@ const unFavorite = (post) => {
 
             <!--articles section-->
             <section class="articles" dir="rtl">
+
                 <div class="article-card" v-for="post, index in posts.data" :key="index">
                     <img v-if="post.image.startsWith(`https:`)" :src="post.image" :alt="post.title">
                     <img v-else :src="`../../../storage/` + post.image" :alt="post.title">
@@ -81,10 +84,14 @@ const unFavorite = (post) => {
             </section>
             <div class="my-4">
                 <!--posts pagination -->
-                <Link v-for="link in posts.links" :href="link.url" v-html="link.label"
-                    :is="link.url ? '<Link></Link>' : '<span></span>'" class="ml-2 p-2 bg-neutral-700 rounded-md"
-                    style="color: #e16c06;">
-                </Link>
+                <template v-for="link in posts.links">
+                    <Link v-if="link.url" :href="link.url" v-html="link.label" class="ml-2 p-2 bg-neutral-300 rounded-md"
+                        style="color: #0b0b0a; font-weight: bold; border: 2px solid black ;">
+                    </Link>
+                    <span v-else v-html="link.label" class="ml-2 p-2 bg-black rounded-md"
+                        style="color: #ffffff; font-weight: bold; border: 2px solid rgb(255, 255, 255) ;"></span>
+                </template>
+
             </div>
 
         </div>

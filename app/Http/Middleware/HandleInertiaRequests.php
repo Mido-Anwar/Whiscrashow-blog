@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 use App\Http\Resources\UserResource;
+use App\Models\Home;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Route;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -37,6 +40,10 @@ class HandleInertiaRequests extends Middleware
                     'user' => $request->user() ? new UserResource($request->user()) : null,
                 ];
             },
+    
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),

@@ -1,3 +1,12 @@
+@font-face {
+    font-family: "pixel";
+    src: url("Pixeboy-z8XGD.ttf") format("truetype");
+}
+@font-face {
+    font-family: "pixel2";
+    src: url("fonts/PixeloidSans-mLxMm.ttf") format("truetype");
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -103,8 +112,9 @@ main {
         width: 30%;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
-
+        justify-content: center;
+        font-family: "pixel2";
+        letter-spacing: 5px;
         ///
         .Whiscrashaw {
             width: 90%;
@@ -145,12 +155,10 @@ main {
         justify-content: space-between;
         padding: 0 20px;
         .logo {
+            width: 50%;
             .Whiscrashaw {
-                font-size: 1.2em;
+                font-size: 1em;
                 color: whitesmoke;
-            }
-            img {
-                display: none;
             }
         }
         .categories {
@@ -244,6 +252,7 @@ main {
         flex-direction: row;
         flex-wrap: wrap;
         z-index: 0;
+        letter-spacing: 2px;
 
         .article-card {
             display: flex;
@@ -269,7 +278,7 @@ main {
                 justify-content: center;
                 width: 95%;
                 height: 20%;
-                overflow-wrap: break-word;
+                overflow-wrap: anywhere;
                 font-size: 1.2em;
                 font-weight: bold;
             }
@@ -332,6 +341,7 @@ main {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     .article-container {
         width: 95%;
         padding: 0 1%;
@@ -471,11 +481,14 @@ footer {
     }
     .social {
         padding: 10px;
-        width: 15%;
+        width: 90%;
         height: 30%;
         display: flex;
         align-items: center;
         justify-content: center;
+        a {
+            margin: 0 20px;
+        }
     }
 }
 @media screen and (max-width: 750px) {

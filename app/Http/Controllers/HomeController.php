@@ -39,7 +39,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::all()->except(
+            'created_at',
+            'updated_at',
+            'detailes'
+        );
         $sliders = DB::table('posts')->take(4)->get();
         // tap method for display post favorited function with paginate data when get POST model
         $posts = tap(Post::paginate(12))->transform(
@@ -47,27 +51,18 @@ class HomeController extends Controller
                 return [
                     'id' => $post->id,
                     'title' => $post->title,
-                    'content' => $post->content,
                     'image' => $post->image,
-                    'slug' => $post->slug,
                     'category_id' => $post->category_id,
                     'user_id' => $post->user_id,
-                    'created_at' => $post->created_at,
-                    'updated_at' => $post->updated_at,
                     'postFavorite' => $post->favorited(),
                 ];
             }
         );
 
-
         return Inertia::render('Welcome', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
             'posts' => $posts,
             'categories' => $categories,
             'sliders' => $sliders,
-
-
         ]);
     }
     /**
@@ -75,16 +70,19 @@ class HomeController extends Controller
      */
     public function search(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::all()->except(
+            'created_at',
+            'updated_at',
+            'detailes'
+        );
         $posts = Post::query()
             ->when($request->input('search'), function ($query, $search) {
                 $query->where('title', 'like', "%" . $search . "%");
             })->get();
         return Inertia::render('Search', [
             'posts' => $posts,
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
             'categories' => $categories,
+
         ]);
     }
     /**
@@ -93,26 +91,25 @@ class HomeController extends Controller
     public function getCategryPosts($id)
     {
         $category = Category::find($id);
-        $categories = Category::all();
+        $categories = Category::all()->except(
+            'created_at',
+            'updated_at',
+            'detailes'
+        );
         $categoriesPosts = tap($category->posts()->paginate(10))->transform(function ($post) {
             return [
                 'id' => $post->id,
                 'title' => $post->title,
-                'content' => $post->content,
                 'image' => $post->image,
-                'slug' => $post->slug,
-                'category_id' => $post->category_id,
-                'user_id' => $post->user_id,
-                'created_at' => $post->created_at,
-                'updated_at' => $post->updated_at,
                 'postFavorite' => $post->favorited(),
             ];
         });
+
+
         return Inertia::render('ShowCategories', [
             'categoriesPosts' => $categoriesPosts,
             'categories' => $categories,
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
+
         ]);
     }
     /**
@@ -126,9 +123,8 @@ class HomeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreHomeRequest $request)
     {
-
 
         $image = $request->file('image')->store('logo', 'public');
         Home::create([
@@ -149,16 +145,17 @@ class HomeController extends Controller
         //   $posts = Post::paginate(10);
         $posts = Post::all();
         //  $post = DB::table('posts')->where('id', $home)->get();
-        $categories = Category::all();
+        $categories = Category::all()->except(
+            'created_at',
+            'updated_at',
+            'detailes'
+        );
 
         return Inertia::render('PostPage', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
+
             'categories' => $categories,
             'post' => $article,
             'author' => $article->user->name,
-            'created_at' => $article->created_at->format('d-m-Y'),
-            'posts' => $posts,
             'favourite_list' => $article->favorited(),
         ]);
     }

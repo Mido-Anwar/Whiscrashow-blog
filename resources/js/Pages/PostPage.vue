@@ -6,21 +6,18 @@ import PrimaryView from '@/Layouts/PrimaryView.vue';
 
 
 const props = defineProps({
-    canLogin: Boolean,
-    canRegister: Boolean,
+
     post: Object,
     categories: Array,
-    posts: Array,
     author: String,
-    created_at: String,
-    favourite_list: Boolean,
+
 });
 
 </script>
 
 <template>
     <Head v-bind:title="post.title" />
-    <PrimaryView v-bind:canLogin="canLogin" v-bind:canRegister="canRegister" v-bind:categories="categories">
+    <PrimaryView  v-bind:categories="categories">
         <section class="article-page">
             <div class="article-container " dir="rtl">
                 <div class="image" v-if="post.image.startsWith(`https:`)">
@@ -34,7 +31,7 @@ const props = defineProps({
                         الناشر : {{ author }}
                     </div>
                     <div>
-                        تاريخ النشر :{{ created_at }}
+                        تاريخ النشر :{{ post.created_at }}
                     </div>
                 </div>
                 <h1 class="title m-3 font-bold text-2xl">
@@ -42,7 +39,7 @@ const props = defineProps({
                 </h1>
 
                 <p v-html="post.content" class="content my-36 text-sm text-center"></p>
-               
+
             </div>
 
         </section>

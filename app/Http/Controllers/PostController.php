@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Tag;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Psy\Util\Str;
 
@@ -27,16 +28,9 @@ class PostController extends Controller
     {
         //right way to write route
         $categories = Category::all();
+        $pagi = Post::with('category')->paginate(10);
         return Inertia::render('Post/Index', [
-            'posts' => Post::all()->map(function ($post) {
-                return [
-                    'id' => $post->id,
-                    'title' => $post->title,
-                    'content' => $post->content,
-                    'image' => asset('storage/' . $post->image),
-                    'post_category' => $post->category,
-                ];
-            })
+            'pagi'=>$pagi,
         ], compact('categories'));
     }
 

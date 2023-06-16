@@ -7,21 +7,11 @@ import Privacy from '@/Components/Privacy.vue';
 import { useRoles } from "@/composables/roles";
 
 
-
-
-
-
-
-
-
-
-
 const props = defineProps({
-    canLogin: Boolean,
-    canRegister: Boolean,
+    //  canLogin: Boolean,
+    //canRegister: Boolean,
     posts: Array,
     categories: Array,
-
 });
 // search method
 let search = ref('');
@@ -44,7 +34,7 @@ const showingNavigationDropdown = ref(false);
     <nav class="navbar" lang="ar" dir="rtl" id="navbar">
         <div class="links">
             <!-- main list button -->
-            <button @click="showingNavigationDropdown = !showingNavigationDropdown" id="menu" aria-labelledby="login list">
+            <button @click="showingNavigationDropdown = !showingNavigationDropdown" id="menu" aria-label="login menu">
                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                     <path :class="{
                         hidden: showingNavigationDropdown,
@@ -58,7 +48,7 @@ const showingNavigationDropdown = ref(false);
 
             </button>
             <!-- main dropdown-->
-            <div v-if="canLogin" id="auth" class="auth"
+            <div v-if="$page.props.canLogin" id="auth" class="auth"
                 :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }">
                 <div class="search">
                     <label for="search" value="Search" class="text-sm text-white"></label>
@@ -87,7 +77,7 @@ const showingNavigationDropdown = ref(false);
                         تسجيل دخول
                         </Link>
 
-                        <Link v-if="canRegister" :href="route('register')" class="link">
+                        <Link v-if="$page.props.canRegister" :href="route('register')" class="link">
                         حساب جديد
                         </Link>
                     </div>
@@ -140,13 +130,13 @@ const showingNavigationDropdown = ref(false);
         <div class="contactme">
             <h2>للتواصل معنا</h2>
             <div class="social">
-                <a class="fa-brands fa-github fa-2xl mx-1" style="color: rgb(255, 183, 0);"></a>
-                <a class="fa-brands fa-linkedin fa-2xl mx-1" style="color: #005eff;"></a>
-                <a class="fa-brands fa-square-whatsapp fa-2xl mx-1" style="color: #10d113;"></a>
+                <a href="https://github.com/Mido-Anwar" aria-label="github" class="fa-brands fa-github fa-2xl mx-1"
+                    style="color: rgb(255, 183, 0);"></a>
+                <a href="https://www.linkedin.com/in/ahmed-anwar-119527174" aria-label="linkedin"
+                    class="fa-brands fa-linkedin fa-2xl mx-1" style="color: #005eff;"></a>
+                <a href=" https://wa.me/+0201007204478" aria-label="whatsup"
+                    class="fa-brands fa-square-whatsapp fa-2xl mx-1" style="color: #10d113;"></a>
             </div>
-            <h2>أو</h2>
-
-
         </div>
 
     </footer>

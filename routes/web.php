@@ -12,8 +12,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
-
-
+use App\Models\Home;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +57,8 @@ Route::get('/show/{id}', [HomeController::class, 'show'])->name('article.show');
 //Route::post('/logoSave', [HomeController::class, 'store'])->name('logo.store');
 //get posts by category route
 Route::get('/categories/{id}', [HomeController::class, 'getCategryPosts'])->name('categories');
+//get posts by tags route
+Route::get('/tags/{id}', [HomeController::class, 'getPostsOnTags'])->name('tags');
 // search route
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 

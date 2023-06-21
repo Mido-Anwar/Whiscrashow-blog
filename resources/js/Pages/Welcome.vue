@@ -12,10 +12,7 @@ defineProps({
         type: Boolean,
     },
     posts: Object,
-    categories: Array,
     sliders: Array,
-
-
 
 });
 /// favorites needed
@@ -31,11 +28,10 @@ const unFavorite = (post) => {
 
 <template>
     <Head title="Welcome" />
-    <PrimaryView v-bind:categories="categories">
+    <PrimaryView>
         <div class="main-content">
             <!--slider section-->
             <section class="slider">
-
                 <Splide :options="{
                     type: 'fade',
                     perPage: 1,

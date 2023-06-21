@@ -6,22 +6,20 @@ use App\Models\Home;
 use App\Http\Requests\StoreHomeRequest;
 use App\Http\Requests\UpdateHomeRequest;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+
 
 
 
 
 class HomeController extends Controller
 {
-
-
     public function __construct()
     {
         $this->middleware('role:Admin')->except(
@@ -31,7 +29,7 @@ class HomeController extends Controller
             'search',
             'favoritePost',
             'unFavoritePost',
-
+            'getPostsOnTags',
         );
     }
     /**
@@ -39,12 +37,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = Category::all()->except(
-            'created_at',
-            'updated_at',
-            'detailes'
-        );
         $sliders = DB::table('posts')->take(4)->get();
+
         // tap method for display post favorited function with paginate data when get POST model
         $posts = tap(Post::paginate(12))->transform(
             function ($post) {
@@ -58,14 +52,15 @@ class HomeController extends Controller
                             $tag->name,
                         ];
                     }),
+
                 ];
             }
         );
-        //dd($posts);
+
         return Inertia::render('Welcome', [
             'posts' => $posts,
-            'categories' => $categories,
             'sliders' => $sliders,
+
         ]);
     }
     /**
@@ -73,19 +68,13 @@ class HomeController extends Controller
      */
     public function search(Request $request)
     {
-        $categories = Category::all()->except(
-            'created_at',
-            'updated_at',
-            'detailes'
-        );
+
         $posts = Post::query()
             ->when($request->input('search'), function ($query, $search) {
                 $query->where('title', 'like', "%" . $search . "%");
             })->get();
         return Inertia::render('Search', [
             'posts' => $posts,
-            'categories' => $categories,
-
         ]);
     }
     /**
@@ -94,11 +83,7 @@ class HomeController extends Controller
     public function getCategryPosts($id)
     {
         $category = Category::find($id);
-        $categories = Category::all()->except(
-            'created_at',
-            'updated_at',
-            'detailes'
-        );
+
         $categoriesPosts = tap($category->posts()->paginate(10))->transform(function ($post) {
             return [
                 'id' => $post->id,
@@ -111,8 +96,25 @@ class HomeController extends Controller
 
         return Inertia::render('ShowCategories', [
             'categoriesPosts' => $categoriesPosts,
-            'categories' => $categories,
+        ]);
+    }
+    /**
+     * posts based on tags in page post links
+     */
+    public function getPostsOnTags($id)
+    {
+        $tags = Tag::find($id);
 
+        $tagsPosts = tap($tags->posts()->paginate(10))->transform(function ($post) {
+            return [
+                'id' => $post->id,
+                'title' => $post->title,
+                'image' => $post->image,
+                'postFavorite' => $post->favorited(),
+            ];
+        });
+        return Inertia::render('ShowTagsPosts', [
+            'tagsPosts' => $tagsPosts,
         ]);
     }
     /**
@@ -146,25 +148,16 @@ class HomeController extends Controller
         //
         $article = Post::find($id);
         //   $posts = Post::paginate(10);
-        $posts = Post::all();
-        //  $post = DB::table('posts')->where('id', $home)->get();
-        $categories = Category::all()->except(
-            'created_at',
-            'updated_at',
-            'detailes'
-        );
-
         return Inertia::render('PostPage', [
-
-            'categories' => $categories,
             'post' => $article,
             'postTags' => $article->tags->map(function ($tag) {
                 return [
-                    $tag->id,
-                    $tag->name,
+                    'id' =>   $tag->id,
+                    'name' =>   $tag->name,
                 ];
             }),
             'author' => $article->user->name,
+            'date' => $article->created_at->format('d, m, Y '),
             'favourite_list' => $article->favorited(),
         ]);
     }

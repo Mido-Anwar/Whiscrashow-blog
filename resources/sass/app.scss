@@ -27,9 +27,6 @@ a {
     text-decoration-line: none;
     color: whitesmoke;
 }
-hr {
-    margin: 10px;
-}
 
 main {
     display: flex;
@@ -320,8 +317,7 @@ main {
 
     .article-container {
         width: 95%;
-        padding: 0 1%;
-        background-color: #bdbdbd;
+        padding: 0 10px;
         display: flex;
         align-items: center;
         justify-content: center;

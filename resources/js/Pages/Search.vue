@@ -4,8 +4,6 @@ import PrimaryView from '@/Layouts/PrimaryView.vue';
 
 
 const props = defineProps({
-
-    categories: Array,
     posts: Array,
 
 });
@@ -14,7 +12,7 @@ const props = defineProps({
 
 <template>
     <Head title="البحث" />
-    <PrimaryView  v-bind:categories="categories">
+    <PrimaryView >
         <section class="main-content">
 
             <section class="articles" dir="rtl">

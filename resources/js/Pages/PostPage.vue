@@ -8,18 +8,18 @@ import PrimaryView from '@/Layouts/PrimaryView.vue';
 const props = defineProps({
 
     post: Object,
-    categories: Array,
     author: String,
-postTags:Object
+    postTags: Object,
+    date: String,
 });
 
 </script>
 
 <template>
     <Head v-bind:title="post.title" />
-    <PrimaryView  v-bind:categories="categories">
+    <PrimaryView>
         <section class="article-page">
-            <div class="article-container " dir="rtl">
+            <div class="article-container bg-slate-300" dir="rtl">
                 <div class="image" v-if="post.image.startsWith(`https:`)">
                     <img :src="post.image" :alt="post.title">
                 </div>
@@ -27,15 +27,19 @@ postTags:Object
                     <img :src="`../../../storage/` + post.image" :alt="post.title">
                 </div>
                 <div class="articleInfo">
-                    <div>
+                    <div class="my-4">
                         الناشر : {{ author }}
                     </div>
-                    <div>
-                        تاريخ النشر :{{ post.created_at }}
+                    <div class="my-4">
+                        تاريخ النشر :{{ date }}
                     </div>
-                    {{ postTags.toString() }}
+                    <div class="my-4">
+                        <Link v-for="tag in postTags" :key="tag.id" style="background-color: #1e1d2a; color: aliceblue;"
+                            class="inline rounded p-3 m-1" :href="route('tags', [tag.id])">{{ tag.name }}</Link>
+                    </div>
+
                 </div>
-                <h1 v-html="post.title" class="title m-3 font-bold text-2xl">
+                <h1 v-html="post.title" class="title my-5 font-bold text-2xl">
 
                 </h1>
 

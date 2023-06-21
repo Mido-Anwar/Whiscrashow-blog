@@ -94,7 +94,7 @@ const showingNavigationDropdown = ref(false);
         <!--main category links-->
         <div class="categories">
 
-            <Link v-for="category in categories" :key="category.id" :href="route('categories', [category.id])" class="mx-3">
+            <Link v-for="category in $page.props.categories" :key="category.id" :href="route('categories', [category.id])" class="mx-3">
             {{ category.name }}
             </Link>
 

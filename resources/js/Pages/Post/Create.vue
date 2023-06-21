@@ -41,21 +41,21 @@ const submit = () => {
             </h2>
         </template>
 
-        <div class="flex flex-col justify-between w-1/2 h-1/2">
+        <div class="flex flex-col justify-between w-10/12 h-1/2">
             <h2 class="m-2 text-gray-700 text-lg font-semibold">HELLO __ {{ $page.props.auth.user.name }}</h2>
             <div class="flex flex-col justify-between">
                 <Link :href="route('post.index')"
                     class="m-2 bg-blue-500 hover:bg-blue-400 text-white font-bold p-2 border-b-4 border-blue-700 rounded w-1/6">
                 Back
                 </Link>
-                <form @submit.prevent="submit">
+                <form @submit.prevent="submit" dir="rtl">
                     <InputLabel for="title" value="Title" />
                     <TextInput type="text" v-model="form.title" class="m-2 w-1/2" dir="rtl"></TextInput>
                     <InputError class="mt-2" :message="form.errors.title" />
 
                     <InputLabel for="content" value="Content" />
                     <div>
-                        <Editor v-model="form.content" api-key="az1dyax66x07uneuuxzi6xos9oh0r277imflde417td7p4z5" />
+                    <Editor v-model="form.content" api-key="az1dyax66x07uneuuxzi6xos9oh0r277imflde417td7p4z5" />
                     </div>
                     <InputError class="m-2" :message="form.errors.content" />
 

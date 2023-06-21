@@ -52,13 +52,16 @@ class HomeController extends Controller
                     'id' => $post->id,
                     'title' => $post->title,
                     'image' => $post->image,
-                    'category_id' => $post->category_id,
-                    'user_id' => $post->user_id,
                     'postFavorite' => $post->favorited(),
+                    'postTags' => $post->tags->map(function ($tag) {
+                        return [
+                            $tag->name,
+                        ];
+                    }),
                 ];
             }
         );
-
+        //dd($posts);
         return Inertia::render('Welcome', [
             'posts' => $posts,
             'categories' => $categories,
@@ -155,6 +158,12 @@ class HomeController extends Controller
 
             'categories' => $categories,
             'post' => $article,
+            'postTags' => $article->tags->map(function ($tag) {
+                return [
+                    $tag->id,
+                    $tag->name,
+                ];
+            }),
             'author' => $article->user->name,
             'favourite_list' => $article->favorited(),
         ]);

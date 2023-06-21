@@ -31,7 +31,7 @@ const unFavorite = (post) => {
 
 <template>
     <Head title="Welcome" />
-    <PrimaryView  v-bind:categories="categories">
+    <PrimaryView v-bind:categories="categories">
         <div class="main-content">
             <!--slider section-->
             <section class="slider">
@@ -76,25 +76,26 @@ const unFavorite = (post) => {
                         </a>
                     </span>
                     <div class="title">{{ post.title }}</div>
-
                     <Link :href="route('article.show', [post.id])" class="button-28">أقرا المزيد ....</Link>
-
                 </div>
 
             </section>
+
             <div class="my-4">
                 <!--posts pagination -->
                 <template v-for="link in posts.links">
                     <Link v-if="link.url" :href="link.url" v-html="link.label" class="ml-2 p-2 bg-neutral-300 rounded-md"
                         style="color: #0b0b0a; font-weight: bold; border: 2px solid black ;">
                     </Link>
-                    <span v-else v-html="link.label" class="ml-2 p-2 bg-black rounded-md"
-                        style="color: #ffffff; font-weight: bold; border: 2px solid rgb(255, 255, 255) ;"></span>
+                    <span v-else v-html="link.label" class="ml-2 p-2 rounded-md"
+                        style="color: #ffffff; font-weight: bold;background-color: #1e1d2a; border: 2px solid rgb(255, 255, 255) ;">
+                    </span>
                 </template>
 
             </div>
 
         </div>
+
     </PrimaryView>
 </template>
 

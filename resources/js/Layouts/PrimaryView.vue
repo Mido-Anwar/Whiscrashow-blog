@@ -35,7 +35,7 @@ const showingNavigationDropdown = ref(false);
         <div class="links">
             <!-- main list button -->
             <button @click="showingNavigationDropdown = !showingNavigationDropdown" id="menu" aria-label="login menu">
-                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                <svg class="h-9 w-9" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                     <path :class="{
                         hidden: showingNavigationDropdown,
                         'inline-flex': !showingNavigationDropdown,
@@ -91,8 +91,6 @@ const showingNavigationDropdown = ref(false);
                 </div>
             </div>
         </div>
-
-
         <!--main category links-->
         <div class="categories">
 

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -30,8 +31,10 @@ class UserController extends Controller
      */
     public function index()
     {
+
+
         return Inertia::render('Admin/Index', [
-            'users' => UserResource::collection(User::all()),
+            'users' => UserResource::collection(User::paginate(10)),
             'roles' => RoleResource::collection(Role::all()),
             'permissions' => PermissionResource::collection(Permission::all()),
         ]);

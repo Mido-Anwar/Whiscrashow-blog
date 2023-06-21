@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Http\Resources\PostResource;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Tag;
@@ -28,9 +29,27 @@ class PostController extends Controller
     {
         //right way to write route
         $categories = Category::all();
-        $pagi = Post::with('category')->paginate(10);
+        $paginatePosts =  tap(Post::paginate(12))->transform(
+            function ($post) {
+                return [
+                    'id' => $post->id,
+                    'title' => $post->title,
+                    'image' => $post->image,
+                    'category' => $post->category  ? $post->category->name : '',
+                    'user_id' => $post->user_id,
+                    'postFavorite' => $post->favorited(),
+                    'postTags' => $post->tags->map(function ($tag) {
+                        return [
+                            'name' => $tag->name,
+                        ];
+
+                    }),
+                ];
+            }
+        );
         return Inertia::render('Post/Index', [
-            'pagi'=>$pagi,
+            'paginatePosts'=>$paginatePosts,
+ 
         ], compact('categories'));
     }
 

@@ -10,7 +10,7 @@ const props = defineProps({
     post: Object,
     categories: Array,
     author: String,
-
+postTags:Object
 });
 
 </script>
@@ -33,9 +33,10 @@ const props = defineProps({
                     <div>
                         تاريخ النشر :{{ post.created_at }}
                     </div>
+                    {{ postTags.toString() }}
                 </div>
-                <h1 class="title m-3 font-bold text-2xl">
-                    {{ post.title }}
+                <h1 v-html="post.title" class="title m-3 font-bold text-2xl">
+
                 </h1>
 
                 <p v-html="post.content" class="content my-36 text-sm text-center"></p>

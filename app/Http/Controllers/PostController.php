@@ -29,27 +29,10 @@ class PostController extends Controller
     {
         //right way to write route
         $categories = Category::all();
-        $paginatePosts =  tap(Post::paginate(12))->transform(
-            function ($post) {
-                return [
-                    'id' => $post->id,
-                    'title' => $post->title,
-                    'image' => $post->image,
-                    'category' => $post->category  ? $post->category->name : '',
-                    'user_id' => $post->user_id,
-                    'postFavorite' => $post->favorited(),
-                    'postTags' => $post->tags->map(function ($tag) {
-                        return [
-                            'name' => $tag->name,
-                        ];
 
-                    }),
-                ];
-            }
-        );
         return Inertia::render('Post/Index', [
-            'paginatePosts'=>$paginatePosts,
- 
+            'paginatePosts' => PostResource::collection(Post::paginate(10)),
+
         ], compact('categories'));
     }
 

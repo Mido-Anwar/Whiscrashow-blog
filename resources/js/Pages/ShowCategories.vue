@@ -7,7 +7,6 @@ import { router } from '@inertiajs/vue3';
 const props = defineProps({
 
     categoriesPosts: Object,
-    logo: String,
 });
 /// favorites needed
 

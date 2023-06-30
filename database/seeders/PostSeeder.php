@@ -13,7 +13,7 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        $post = Post::factory(40)->create(
+        $post = Post::factory(1000)->create(
             [
                 'title' => fake()->text(50),
                 'content' => fake()->text(500),

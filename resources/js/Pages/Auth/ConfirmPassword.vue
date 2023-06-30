@@ -22,12 +22,12 @@ const submit = () => {
         <Head title="Confirm Password" />
 
         <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-            This is a secure area of the application. Please confirm your password before continuing.
+            تاكيد امان . يرجى تأكيد كلمة المرور الخاصة بك قبل المتابعة.
         </div>
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" dir="rtl">
             <div>
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="كلمة السر" />
                 <TextInput
                     id="password"
                     type="password"
@@ -42,7 +42,7 @@ const submit = () => {
 
             <div class="flex justify-end mt-4">
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Confirm
+                 تاكيد
                 </PrimaryButton>
             </div>
         </form>

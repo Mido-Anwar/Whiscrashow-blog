@@ -3,10 +3,11 @@
 import { Head, useForm, Link } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { router } from '@inertiajs/vue3';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
+
 
 defineProps({
     tags: Object,
+    tags2:Object
 });
 
 function destroy(id) {
@@ -36,8 +37,10 @@ function destroy(id) {
                 <thead class="px-4 py-2 border-black">
                     <tr>
                         <th class="px-4 py-2 border border-black">Id</th>
-                        <th class="px-4 py-2 border border-black">NAme</th>
+                        <th class="px-4 py-2 border border-black">Name</th>
                         <th class="px-4 py-2 border border-black">Detailes</th>
+                        <th class="px-4 py-2 border border-black">Category</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +48,7 @@ function destroy(id) {
                         <td class="border px-4 py-2 border-black">{{ tag.id }}</td>
                         <td class="border px-4 py-2 border-black">{{ tag.name }}</td>
                         <td class="border px-4 py-2 border-black">{{ tag.detailes }}</td>
+                        <td class="border px-4 py-2 border-black">{{ tag.category.name }}</td>
                         <td class="border px-4 py-2 border-black">
                             <Link class="btn bg-green-500 hover:bg-green-700 btn m-1 p-1" :href="route('tag.edit', tag.id)">
                             Edit tag
@@ -57,6 +61,7 @@ function destroy(id) {
 
                 </tbody>
             </table>
+            {{ tags2 }}
         </div>
 
     </AuthenticatedLayout>

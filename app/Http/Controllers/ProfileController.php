@@ -25,14 +25,8 @@ class ProfileController extends Controller
             function ($post) {
                 return [
                     'id' => $post->id,
-                    'title' => $post->title,
-                    'content' => $post->content,
-                    'image' => $post->image,
-                    'slug' => $post->slug,
-                    'category_id' => $post->category_id,
+                    'title' => $post->title,     
                     'user_id' => $post->user_id,
-                    'created_at' => $post->created_at,
-                    'updated_at' => $post->updated_at,
                     'postFavorite' => $post->favorited(),
                 ];
             }

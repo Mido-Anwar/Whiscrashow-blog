@@ -20,16 +20,10 @@ class TagController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Tag/Index', [
-            'tags' => Tag::all()->map(function ($tag) {
-                return [
-                    'id' => $tag->id,
-                    'name' => $tag->name,
-                    'detailes' => $tag->detailes,
-                    'category' => $tag->category()->value('name')
-                ];
-            }),
 
+        $tags = Tag::with('category:id,name')->get();
+        return Inertia::render('Tag/Index', [
+            'tags' =>$tags
         ]);
     }
 

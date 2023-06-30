@@ -35,9 +35,9 @@ const submit = () => {
     <GuestLayout>
         <Head title="Reset Password" />
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" dir="rtl">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="البريد الالكتروني" />
 
                 <TextInput
                     id="email"
@@ -53,7 +53,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="كلمة السر" />
 
                 <TextInput
                     id="password"
@@ -68,7 +68,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <InputLabel for="password_confirmation" value=" تاكبد كلمة السر" />
 
                 <TextInput
                     id="password_confirmation"

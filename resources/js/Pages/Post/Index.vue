@@ -54,7 +54,8 @@ function destroy(id) {
                         <td class="border px-4 py-2 border-black">{{ post.title }}</td>
                         <td class="border px-4 py-2 border-black">{{ post.category }}</td>
                         <!-- at this line i get post tags by two map function frist in backend and this line to name proprty because without that the return object will display key and value -->
-                        <td class="border px-4 py-2 border-black">{{ post.postTags.map(({ name }) => name).toString() }} </td>
+                        <td class="border px-4 py-2 border-black">{{ post.postTags.map(({ name }) => name).toString() }}
+                        </td>
 
                         <td class="border px-4 py-2 border-black">
                             <Link class="btn bg-green-500 hover:bg-green-700 btn m-1 p-1"
@@ -71,7 +72,7 @@ function destroy(id) {
             </table>
             <div class="flex justify-center my-4">
                 <!--posts pagination -->
-                <template v-for="link in paginatePosts.links">
+                <template v-for="link in paginatePosts.meta.links">
                     <Link v-if="link.url" :href="link.url" v-html="link.label" class="ml-2 p-2 bg-neutral-300 rounded-md"
                         style="color: #0b0b0a; font-weight: bold; border: 2px solid black ;">
                     </Link>

@@ -6,7 +6,8 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;

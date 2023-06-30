@@ -34,7 +34,7 @@ class UserController extends Controller
 
 
         return Inertia::render('Admin/Index', [
-            'users' => UserResource::collection(User::paginate(10)),
+            'users' => UserResource::collection(User::with('roles','permissions',)->paginate(10)),
             'roles' => RoleResource::collection(Role::all()),
             'permissions' => PermissionResource::collection(Permission::all()),
         ]);

@@ -17,19 +17,14 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'content'=>$this->content,
-            'image'=>$this->image,
+            'image' => $this->image,
             'category' => $this->category ? $this->category->name : '',
-            'user_id' => $this->user_id,
             'postFavorite' => $this->favorited(),
             'postTags' => $this->tags->transform(function ($tag) {
                 return [
-                    'name' => $tag->name ,
+                    'name' => $tag->name,
                 ];
-
             }),
         ];
     }
-
-
 }

@@ -129,7 +129,7 @@ const showingNavigationDropdown = ref(false);
             <h2>للتواصل معنا</h2>
             <div class="social">
                 <a href="https://github.com/Mido-Anwar" aria-label="github" class="fa-brands fa-github fa-2xl mx-1"
-                    style="color: rgb(255, 183, 0);"></a>
+                    style="color: #e16c06;"></a>
                 <a href="https://www.linkedin.com/in/ahmed-anwar-119527174" aria-label="linkedin"
                     class="fa-brands fa-linkedin fa-2xl mx-1" style="color: #005eff;"></a>
                 <a href=" https://wa.me/+0201007204478" aria-label="whatsup"

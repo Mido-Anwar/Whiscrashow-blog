@@ -40,7 +40,7 @@ const unFavorite = (post) => {
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg" dir="rtl">
                     <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">المقالات المفضلة</h2>
 
-                    <div class="article-card border my-3 bg-slate-500" v-for="post in userPosts.target" :key="post.id">
+                    <div class="article-card border my-3 bg-slate-500 h-80" v-for="post in userPosts.target" :key="post.id">
                         <span v-if="$page.props.auth.user" style="align-self: start;">
                             <a href="#" v-if="post.postFavorite == false" @click.prevent="favorite(post.id)">
                                 <i id="like" class="fa-regular fa-heart mx-2"></i>القراءة لاحقا

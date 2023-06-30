@@ -13,7 +13,7 @@ class Category extends Model
         'name',
         'detailes',
     ];
-
+    public $timestamps = false;
     //relation between category and tags
 
     public function tags(): HasMany

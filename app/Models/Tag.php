@@ -14,6 +14,7 @@ class Tag extends Model
         'detailes',
         'category_id',
     ];
+    public $timestamps = false;
     //relation between category and tag
     public function category(): BelongsTo
     {

@@ -6,7 +6,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 import TextInput from '@/Components/TextInput.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import Editor from '@tinymce/tinymce-vue';
 
 const props = defineProps({
     post: Object,
@@ -66,7 +66,7 @@ let submit = () => {
                     <InputError class="mt-2" :message="form.errors.title" />
 
                     <InputLabel for="content" value="Content" />
-                    <textarea type="textarea" id="content" v-model="form.content" class="m-2 w-1/2" col="8"></textarea>
+                    <Editor  id="content" v-model="form.content" class="m-2 w-1/2" col="8"></Editor>
                     <InputError class="m-2" :message="form.errors.content" />
 
                     <InputLabel class="m-1 block w-full mb" for="image" value="Image" />

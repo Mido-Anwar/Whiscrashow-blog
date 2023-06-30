@@ -1,16 +1,11 @@
 <script setup>
 import PrimaryView from '@/Layouts/PrimaryView.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
+
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 
 
 defineProps({
-    canLogin: {
-        type: Boolean,
-    },
-    canRegister: {
-        type: Boolean,
-    },
     posts: Object,
     sliders: Array,
 
@@ -79,7 +74,7 @@ const unFavorite = (post) => {
 
             <div class="my-4">
                 <!--posts pagination -->
-                <template v-for="link in posts.links">
+                <template v-for="link in posts.meta.links">
                     <Link v-if="link.url" :href="link.url" v-html="link.label" class="ml-2 p-2 bg-neutral-300 rounded-md"
                         style="color: #0b0b0a; font-weight: bold; border: 2px solid black ;">
                     </Link>

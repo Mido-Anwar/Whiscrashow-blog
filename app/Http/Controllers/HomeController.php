@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Resources\PostResource;
 
 
 
@@ -40,25 +40,25 @@ class HomeController extends Controller
         $sliders = DB::table('posts')->take(4)->get();
 
         // tap method for display post favorited function with paginate data when get POST model
-        $posts = tap(Post::paginate(12))->transform(
-            function ($post) {
-                return [
-                    'id' => $post->id,
-                    'title' => $post->title,
-                    'image' => $post->image,
-                    'postFavorite' => $post->favorited(),
-                    'postTags' => $post->tags->map(function ($tag) {
-                        return [
-                            $tag->name,
-                        ];
-                    }),
+        // $posts = tap(Post::paginate(12))->transform(
+        //     function ($post) {
+        //         return [
+        //             'id' => $post->id,
+        //             'title' => $post->title,
+        //             'image' => $post->image,
+        //             'postFavorite' => $post->favorited(),
+        //             'postTags' => $post->tags->map(function ($tag) {
+        //                 return [
+        //                     $tag->name,
+        //                 ];
+        //             }),
 
-                ];
-            }
-        );
+        //         ];
+        //     }
+        // );
 
         return Inertia::render('Welcome', [
-            'posts' => $posts,
+            'posts' => PostResource::collection(Post::with('category','tags',)->paginate(20)),
             'sliders' => $sliders,
 
         ]);
@@ -70,12 +70,15 @@ class HomeController extends Controller
     {
 
         $posts = Post::query()
-            ->when($request->input('search'), function ($query, $search) {
-                $query->where('title', 'like', "%" . $search . "%");
+            ->when($request->input('search'),
+             function ($query, $search) {
+                $query->where('title', 'like', "%{$search }%");
             })->get();
-        return Inertia::render('Search', [
-            'posts' => $posts,
-        ]);
+
+            return Inertia::render('Search', [
+                'posts' => $posts,
+            ]);
+
     }
     /**
      * posts based on category

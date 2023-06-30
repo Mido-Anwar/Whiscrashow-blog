@@ -389,7 +389,7 @@ footer {
             flex-direction: column;
             align-items: center;
             justify-content: space-evenly;
-            color: #e16c06;
+            color: white;
 
             .title {
                 width: 100%;
@@ -398,7 +398,7 @@ footer {
                 align-items: flex-start;
                 justify-content: center;
                 button {
-                    color: #e16c06;
+                    color: white;
                     border: 1px solid #e16c06;
                     border-radius: 10px;
                     padding: 10px;
@@ -408,7 +408,7 @@ footer {
             .content {
                 padding: 1%;
                 background-color: rgb(55, 54, 54);
-                color: #e16c06;
+                color: white;
                 width: 100%;
                 height: auto;
                 border-radius: 10px;
@@ -422,14 +422,14 @@ footer {
             flex-direction: column;
 
             button {
-                color: #e16c06;
+                color: white;
                 border: 1px solid #e16c06;
                 border-radius: 10px;
                 padding: 10px;
                 margin: 10px 0;
             }
             .privcy {
-                color: #e16c06;
+                color: white;
                 padding: 14px;
                 background-color: rgb(55, 54, 54);
                 border-radius: 10px;
@@ -447,8 +447,11 @@ footer {
         justify-content: center;
         flex-direction: column;
         h2 {
-            margin: 15px 0;
-            color: #e16c06;
+            margin: 35px 0;
+            color: white;
+            border: #e16c06 2px solid;
+            padding: 20px;
+            border-radius: 5px;
         }
     }
     .social {
@@ -472,7 +475,7 @@ footer {
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        background-color: black;
+
 
         .collect {
             .aboutme {

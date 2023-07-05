@@ -8,7 +8,7 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
 defineProps({
     posts: Object,
     sliders: Array,
-
+    categories :Array,
 });
 /// favorites needed
 
@@ -23,8 +23,9 @@ const unFavorite = (post) => {
 
 <template>
     <Head title="Welcome" />
-    <PrimaryView>
+    <PrimaryView v-bind:categories="categories">
         <div class="main-content">
+        
             <!--slider section-->
             <section class="slider">
                 <Splide :options="{

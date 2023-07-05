@@ -8,22 +8,15 @@ import { useRoles } from "@/composables/roles";
 
 
 const props = defineProps({
-    //  canLogin: Boolean,
-    //canRegister: Boolean,
     posts: Array,
-    categories: Array,
+    categories: Object,
 });
 // search method
 let search = ref('');
 watch(search, value => {
     router.get('/search', { search: value }, { preserveState: true });
 });
-// contact send message method
-//const submit = () => {
-//    form.post(route('contact'), {
-//        onFinish: () => form.reset('email', 'name', 'message'),
-//    });
-//}
+
 // user roles
 const { hasRole } = useRoles();
 // great idea thank you vue.js dropdown list
@@ -94,7 +87,7 @@ const showingNavigationDropdown = ref(false);
         <!--main category links-->
         <div class="categories">
 
-            <Link v-for="category in $page.props.categories" :key="category.id" :href="route('categories', [category.id])" class="mx-3">
+            <Link v-for="category in categories" :key="category.id" :href="route('categories', [category.id])" class="mx-3">
             {{ category.name }}
             </Link>
 

@@ -10,7 +10,7 @@ use App\Models\Category;
 use App\Models\Home;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\DB;
 class HandleInertiaRequests extends Middleware
 {
     /**
@@ -44,7 +44,6 @@ class HandleInertiaRequests extends Middleware
 
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
-            'categories' => Category::select('id', 'name')->get(),
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),

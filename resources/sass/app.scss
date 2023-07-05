@@ -1,19 +1,4 @@
-@font-face {
-    font-family: "pixel";
-    src: url("Pixeboy-z8XGD.ttf") format("truetype");
-}
-@font-face {
-    font-family: "pixel2";
-    src: url("fonts/PixeloidSans-mLxMm.ttf") format("truetype");
-}
-@font-face {
-    font-family: "pixel3";
-    src: url("fonts/PixeloidMono-d94EV.tff") format("truetype");
-}
-@font-face {
-    font-family: "pixel4";
-    src: url("fonts/PixeloidSansBold-PKnYd.ttf") format("truetype");
-}
+
 
 * {
     box-sizing: border-box;
@@ -103,7 +88,6 @@ main {
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "pixel4";
         letter-spacing: 5px;
         ///
         .Whiscrashaw {
@@ -307,6 +291,7 @@ main {
 ///////////// article-page
 .article-page {
     margin-top: 200px;
+    margin-bottom: 200px;
     width: 100%;
     padding: 0 1%;
     align-self: center;

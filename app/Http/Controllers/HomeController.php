@@ -37,8 +37,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sliders = DB::table('posts')->take(4)->get();
-
+        $sliders = DB::table('posts')->select('id', 'title', 'image')->take(4)->get();
+        $categories = DB::table('categories')->select('id', 'name')->get();
         // tap method for display post favorited function with paginate data when get POST model
         // $posts = tap(Post::paginate(12))->transform(
         //     function ($post) {
@@ -58,9 +58,9 @@ class HomeController extends Controller
         // );
 
         return Inertia::render('Welcome', [
-            'posts' => PostResource::collection(Post::with('category','tags',)->paginate(20)),
+            'posts' => PostResource::collection(Post::select('id','title','image')->with('category','tags')->paginate(20)),
             'sliders' => $sliders,
-
+            'categories' => $categories,
         ]);
     }
     /**
@@ -68,17 +68,20 @@ class HomeController extends Controller
      */
     public function search(Request $request)
     {
+        $categories = DB::table('categories')->select('id', 'name')->get();
 
         $posts = Post::query()
-            ->when($request->input('search'),
-             function ($query, $search) {
-                $query->where('title', 'like', "%{$search }%");
-            })->get();
+            ->when(
+                $request->input('search'),
+                function ($query, $search) {
+                    $query->where('title', 'like', "%{$search}%");
+                }
+            )->get();
 
-            return Inertia::render('Search', [
-                'posts' => $posts,
-            ]);
-
+        return Inertia::render('Search', [
+            'posts' => $posts,
+            'categories' => $categories,
+        ]);
     }
     /**
      * posts based on category
@@ -86,6 +89,7 @@ class HomeController extends Controller
     public function getCategryPosts($id)
     {
         $category = Category::find($id);
+        $categories = DB::table('categories')->select('id', 'name')->get();
 
         $categoriesPosts = tap($category->posts()->paginate(10))->transform(function ($post) {
             return [
@@ -99,6 +103,7 @@ class HomeController extends Controller
 
         return Inertia::render('ShowCategories', [
             'categoriesPosts' => $categoriesPosts,
+            'categories' => $categories,
         ]);
     }
     /**
@@ -107,6 +112,7 @@ class HomeController extends Controller
     public function getPostsOnTags($id)
     {
         $tags = Tag::find($id);
+        $categories = DB::table('categories')->select('id', 'name')->get();
 
         $tagsPosts = tap($tags->posts()->paginate(10))->transform(function ($post) {
             return [
@@ -118,6 +124,7 @@ class HomeController extends Controller
         });
         return Inertia::render('ShowTagsPosts', [
             'tagsPosts' => $tagsPosts,
+            'categories' => $categories,
         ]);
     }
     /**

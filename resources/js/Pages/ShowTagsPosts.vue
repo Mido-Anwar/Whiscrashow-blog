@@ -7,6 +7,7 @@ import { router } from '@inertiajs/vue3';
 const props = defineProps({
 
     tagsPosts: Object,
+    categories :Array,
 
 });
 /// favorites needed
@@ -22,7 +23,7 @@ const unFavorite = (post) => {
 </script>
 <template>
     <Head title="مقالات الوسم" />
-    <PrimaryView>
+    <PrimaryView v-bind:categories="categories">
         <section class="main-content">
 
             <section class="articles bg-slate-300" dir="rtl">

@@ -6,6 +6,8 @@ import { router } from '@inertiajs/vue3';
 const props = defineProps({
     posts: Array,
     message: String,
+    categories :Array,
+
 
 });
 /// favorites needed
@@ -21,7 +23,7 @@ const unFavorite = (post) => {
 
 <template>
     <Head title="البحث" />
-    <PrimaryView>
+    <PrimaryView v-bind:categories="categories">
         <section class="main-content">
 
             <section class="articles" dir="rtl">
@@ -43,7 +45,7 @@ const unFavorite = (post) => {
                         </div>
                     </div>
                 </div>
-                <div v-else class="w-1/2 my-5 bg-slate-600 text-white "
+                <div v-else class="w-1/2 my-5 bg-slate-600 text-white"
                     style="height: 550px; display: flex; justify-content: center; align-items: center;">
                     <p class=" text-2xl ">
                        عفوا لا يوجد مقال بهذا العنوان

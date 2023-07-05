@@ -11,13 +11,15 @@ const props = defineProps({
     author: String,
     postTags: Object,
     date: String,
+    categories :Array,
+
 });
 
 </script>
 
 <template>
     <Head v-bind:title="post.title" />
-    <PrimaryView>
+    <PrimaryView v-bind:categories="categories">
         <section class="article-page">
             <div class="article-container bg-slate-300" dir="rtl">
                 <div class="image" v-if="post.image.startsWith(`https:`)">

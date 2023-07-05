@@ -18,13 +18,13 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'image' => $this->image,
-            'category' => $this->category ? $this->category->name : '',
+       //     'category' => $this->category ? $this->category->name : '',
             'postFavorite' => $this->favorited(),
-            'postTags' => $this->tags->transform(function ($tag) {
-                return [
-                    'name' => $tag->name,
-                ];
-            }),
-        ];
+        //     'postTags' => $this->tags->transform(function ($tag) {
+        //         return [
+        //             'name' => $tag->name,
+        //         ];
+        //     }),
+         ];
     }
 }

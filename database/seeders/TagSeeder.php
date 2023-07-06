@@ -14,7 +14,7 @@ class TagSeeder extends Seeder
     {
         $Tag = Tag::factory(10)->create(
             [
-                'name' => fake()->word,
+                'name' => fake()->unique()->word,
                 'detailes' => 'web',
                 'category_id'=> rand(0,3)
             ],

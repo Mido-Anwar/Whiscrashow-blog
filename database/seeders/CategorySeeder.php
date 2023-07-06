@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
     {
         $Category = Category::factory(3)->create(
             [
-                'name' => fake()->word,
+                'name' =>fake()->unique()->word,
                 'detailes' => 'web',
             ],
 

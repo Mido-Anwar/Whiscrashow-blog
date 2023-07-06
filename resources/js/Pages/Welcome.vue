@@ -1,7 +1,6 @@
 <script setup>
 import PrimaryView from '@/Layouts/PrimaryView.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
-
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 
 
@@ -24,10 +23,10 @@ const unFavorite = (post) => {
 <template>
     <Head title="Welcome" />
     <PrimaryView v-bind:categories="categories">
-        <div class="main-content">
-        
+        <div class="main-content" v-lazy-container="{ selector: 'img' }">
+
             <!--slider section-->
-            <section class="slider">
+            <section class="slider" >
                 <Splide :options="{
                     type: 'fade',
                     perPage: 1,
@@ -56,7 +55,7 @@ const unFavorite = (post) => {
             <!--articles section-->
             <section class="articles" dir="rtl">
 
-                <div class="article-card" v-for="post, index in posts.data" :key="index">
+                <div class="article-card" v-for="post, index in posts.data" :key="index" >
                     <img v-if="post.image.startsWith(`https:`)" :src="post.image" :alt="post.title">
                     <img v-else :src="`../../../storage/` + post.image" :alt="post.title">
                     <span v-if="$page.props.auth.user" style="align-self: start;">

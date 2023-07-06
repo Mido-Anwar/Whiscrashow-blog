@@ -20,8 +20,8 @@ class PostSeeder extends Seeder
                 'content' => fake()->text(500),
                 'slug' => fake()->text(50),
                 'image' => fake()->imageUrl($width = 400, $height = 400),
-                'category_id' => rand(0,3),
-                'user_id'=> 1,
+                'category_id' => fake()->numberBetween(0, 3),
+                'user_id' => 1,
 
             ],
 

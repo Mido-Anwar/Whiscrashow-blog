@@ -58,7 +58,7 @@ class HomeController extends Controller
         // );
 
         return Inertia::render('Welcome', [
-            'posts' => PostResource::collection(Post::select('id','title','image')->with('category','tags')->paginate(20)),
+            'posts' => PostResource::collection(Post::select('id','title','image')->with('category','tags','user')->paginate(20)),
             'sliders' => $sliders,
             'categories' => $categories,
         ]);

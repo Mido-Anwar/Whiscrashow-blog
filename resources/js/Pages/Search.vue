@@ -11,7 +11,7 @@ const props = defineProps({
 
 
 });
-/// favorites needed
+/// favorites needed from "@/composables/roles"
 
 const {favorite } = useRoles();
 const { unFavorite } = useRoles();

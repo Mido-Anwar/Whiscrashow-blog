@@ -2,6 +2,7 @@
 import PrimaryView from '@/Layouts/PrimaryView.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import { useRoles } from "@/composables/roles";
 
 
 defineProps({
@@ -11,19 +12,14 @@ defineProps({
 });
 /// favorites needed
 
-const favorite = (post) => {
-    router.post(`/favorite/${post}`);
-};
-
-const unFavorite = (post) => {
-    router.post(`/unfavorite/${post}`);
-};
+const {favorite } = useRoles();
+const { unFavorite } = useRoles();
 </script>
 
 <template>
     <Head title="Welcome" />
     <PrimaryView v-bind:categories="categories">
-        <div class="main-content" v-lazy-container="{ selector: 'img' }">
+        <div class="main-content">
 
             <!--slider section-->
             <section class="slider" >

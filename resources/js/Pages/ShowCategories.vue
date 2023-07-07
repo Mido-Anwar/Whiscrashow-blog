@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import PrimaryView from '@/Layouts/PrimaryView.vue';
 import { router } from '@inertiajs/vue3';
+import { useRoles } from "@/composables/roles";
 
 
 const props = defineProps({
@@ -12,14 +13,8 @@ const props = defineProps({
 });
 /// favorites needed
 
-const favorite = (post) => {
-    router.post(`/favorite/${post}`);
-};
-
-const unFavorite = (post) => {
-    router.post(`/unfavorite/${post}`);
-};
-
+const {favorite } = useRoles();
+const { unFavorite } = useRoles();
 </script>
 
 <template>

@@ -6,7 +6,7 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import VueSplide from '@splidejs/vue-splide';
-import VueLazyload from 'vue-lazyload';
+
 
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Whiscrashow';
@@ -17,7 +17,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue, Ziggy,VueSplide,VueLazyload)
+            .use(ZiggyVue, Ziggy,VueSplide)
             .mount(el);
     },
     progress: {

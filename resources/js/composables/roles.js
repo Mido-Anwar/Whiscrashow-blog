@@ -22,11 +22,20 @@ export function useRoles() {
             router.delete(route("user.destroy", id));
         }
     };
+    const favorite = (post) => {
+        router.post(`/favorite/${post}`);
+    };
+
+    const unFavorite = (post) => {
+        router.post(`/unfavorite/${post}`);
+    };
     return {
         hasRole,
         hasPermission,
         roleDestroy,
         permissionDestroy,
         userDestroy,
+        favorite,
+        unFavorite,
     };
 }

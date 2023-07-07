@@ -5,6 +5,7 @@ import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
+import { useRoles } from "@/composables/roles";
 
 
 defineProps({
@@ -16,13 +17,8 @@ defineProps({
     },
     userPosts: Object,
 });
-const favorite = (post) => {
-    router.post(`/favorite/${post}`);
-};
-
-const unFavorite = (post) => {
-    router.post(`/unfavorite/${post}`);
-};
+const {favorite } = useRoles();
+const { unFavorite } = useRoles();
 
 </script>
 
